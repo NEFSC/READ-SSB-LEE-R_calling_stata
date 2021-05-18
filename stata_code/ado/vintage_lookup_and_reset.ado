@@ -4,9 +4,22 @@ cap program drop vintage_lookup_and_reset
 program vintage_lookup_and_reset
 
 	/* Look through the data_main folder to see what data vintages are available */
-	local data_vintage : dir "${data_main}" files "dmis_output_species_prices_*.dta" 
-	local data_vintage: subinstr local data_vintage "dmis_output_species_prices_" "", all
+
+	local data_vintage : dir "${data_main}" files "*.dta" 
 	local data_vintage: subinstr local data_vintage ".dta" "", all
+	
+	/* look through all the files and pick out the unique vintages, which are in the last 10 characters */
+	/* If you were better at regular expressions, you could keep things that end in numbers, or end in NNNN_NN_NN*/
+	/* But this is good for now */
+	
+	local stubs
+	foreach var of local data_vintage {
+		local stub = substr("`var'",length("`var'") - 9,10)
+		local stubs `stubs' `stub'
+	}
+
+	local data_vintage: list uniq stubs
+	local data_vintage: list sort data_vintage
 
 	/* print out the current vintage string */
 	di "The vintage_string global is currently set as: $vintage_string"
