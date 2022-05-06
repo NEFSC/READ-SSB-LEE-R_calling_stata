@@ -1,7 +1,8 @@
-# This decsribes how /what to run.
-rm(list=ls())
+# This describes how /what to run.
 #### Set things up
-my_projdir<-"C:/Users/Min-Yang.Lee/Documents/READ-SSB-Lee_R_calling_stata"
+here::i_am("R_code/stataR_wrapper.R")
+library(here)
+my_projdir<-here()
 
 #this reads in paths and libraries
 # Be careful, there may be few masked objects (packages with commands with the same name)
