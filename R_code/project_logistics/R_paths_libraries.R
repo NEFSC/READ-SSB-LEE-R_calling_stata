@@ -65,7 +65,7 @@ stataexe <- ""
 
 for (d in c("C:/Program Files","C:/Program Files (x86)")) {
   if (stataexe=="" & dir.exists(d)) {
-    for (v in seq(17,11,-1)) {
+    for (v in seq(18,11,-1)) {
       dv <- paste(d,paste0("Stata",v), sep="/")
       if (dir.exists(dv)) {
         for (f in c("Stata", "StataIC", "StataSE", "StataMP",
